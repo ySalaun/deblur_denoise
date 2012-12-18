@@ -1,0 +1,64 @@
+/////////////////
+//  Denoising  //
+/////////////////
+
+B = blurred image, low ISO, slow shutter speed
+N = noisy image, high ISO, faster than safe shutter speed
+
+// compensate exposure difference between B & N
+N *= (ISO_B * delta_tB) / (ISO_N * delta_tN) 	// delta is exposure time
+
+//! multiplication is performed in irradiance space ???
+
+// denoise N
+Nd = denoising(N)	// method Portilla et al. 2003 & section 7
+					// http://decsai.ugr.es/~javier/denoise/
+
+I = Nd + delta_I	// delta_I is difference between original picture and denoised noisy one
+B = I x K			// K is blur kernel and x is convolution product
+
+// Note that Nd is a good approximation for K so that B = Nd x K and:
+// delta_B = delta_I x K
+// delta_B = B - Nd x K
+
+// ITERATIVE PROCESSING
+
+// INITIALIZATION
+I = Nd
+
+// PROCESS
+while(difference_between_2_steps > epsilon){
+	// STEP 1: Estimate K
+	
+	//! Test initialization with N_denoised or B_fastly_deblurred or N_noisy ??
+
+	// STEP 2: Residual & Gain-controlled deconvolutions
+
+	while(difference_between_2_steps > epsilon){
+		alpha = 0.2
+		I_gain = (1-alpha)+alpha.sum(||grad(N_d(l)||)
+		//! what is N_d(l) ?
+		//! the denoised picture at the lth level of the gaussian pyramid with s.d 0.5
+		delta_I  =       [[K * (delta_B + 1)/((delta_I+1) x K](delta_I+1)-1]
+		delta_Ig = I_gain[[K * (delta_B + 1)/((delta_Ig+1) x K](delta_Ig+1)-1]
+		// * is the correlation operator
+		// I_gain is here to control ringing effect (I_gain <= 1)
+		//! what is correlation operator ??
+		//! deringing part can be put aside
+	}
+	delta_Ig /= I_gain	// last iteration is not multiplied by I_gain
+
+	I  = Nd + delta_I
+	Ig = Nd + delta_Ig
+	// recover images Ig & I
+	// I has ringing effects whereas I has finer details
+
+	// STEP 3: Mix the 2 deconvolutions for final picture
+
+	Î(x)  = normalized_sum_on_window(Gd(x_w - x)Gr(I(x)-Ig(x_w))I(x_w))
+	// with s.d. for Gd of 1.6 and for Gr of 0.08
+
+	Id = I - Î	// take the details from I
+
+	I = Ig + Id	// resulting picture
+}
