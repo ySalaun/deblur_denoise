@@ -20,6 +20,7 @@ Color intensity(Image<Color,2>& I, int i, int j){
 }
 
 float color2gray(Color c){
+	//cout << (c.r()/3.0+c.g()/3.0+c.b()/3.0)/256.0 << endl;
 	return (c.r()/3.0+c.g()/3.0+c.b()/3.0)/256.0;
 }
 
@@ -64,6 +65,20 @@ Vector<float> img2vect(Image<Color,2>& I){
 	}
 	
 	return If;
+}
+
+Image<Color,2> vect2img(Vector<float>& I, int w, int h){
+	int i, j, c;
+	Image<Color,2> Ic(w, h);
+
+	for(i=0; i<w; ++i){
+		for(j=0; j<h; ++j){
+			c = int(256*I[i+j*w]);
+			Ic(i,j) = Color(c, c, c);
+		}
+	}
+	
+	return Ic;
 }
 
 Matrix<float> img2kernelMatrix(Image<Color,2>& I, const int kernel_size){
@@ -112,14 +127,14 @@ Image<Color,2> kernelBlurring(Image<Color,2>& I, Vector<float> k, const int kern
 }
 
 // algorithm ------------------------------------------------
-Vector<float> kernelEstimation(Image<Color,2>& I, Image<Color,2>& B, const int kernel_size){
+Vector<float> kernelEstimation(Image<Color,2>& I, Image<Color,2>& B, const int kernel_size, Vector<float> kernel){
 	int i, j;
 	float k_size2 = kernel_size*kernel_size;
 	float norm;
 
 	// parameters
-	int niter = 20;						// number of iterations
-	float beta = 1.0;					// parameter for reccursive formula of k
+	int niter = 30;						// number of iterations
+	float beta = 0.01;					// parameter for reccursive formula of k
 	float lambda = 5.0;					// smoothness parameter
 	float lambda2 = lambda*lambda;
 	
@@ -128,6 +143,7 @@ Vector<float> kernelEstimation(Image<Color,2>& I, Image<Color,2>& B, const int k
 	Vector<float> k;
 	k.setSize(kernel_size*kernel_size);
 	Matrix<float> A = img2kernelMatrix(I, kernel_size);
+	b = A*kernel;
 	Matrix<float> AtA = transpose(A)*A;
 	Vector<float> Atb = transpose(A)*b;
 
@@ -137,6 +153,7 @@ Vector<float> kernelEstimation(Image<Color,2>& I, Image<Color,2>& B, const int k
 	}
 	k[kernel_size/2*(1 + kernel_size)] = 1;
 	displayKernel(k, kernel_size);
+	displayKernel(Atb-AtA*k, kernel_size);
 
 	// loop to find k
 	for(i=0; i<niter; ++i){
@@ -152,6 +169,11 @@ Vector<float> kernelEstimation(Image<Color,2>& I, Image<Color,2>& B, const int k
 		// normalize k
 		if(norm != 0){
 			k /= norm;
+		}
+		else{
+			for(j=0; j<k_size2; ++j){
+				k[j] = 1.0/k_size2;
+			}
 		}
 		displayKernel(k, kernel_size);
 	}
@@ -192,7 +214,8 @@ int main()
 	// initialize k as a gaussian
 	for(ii=-ks; ii<=ks; ++ii){
 		for(jj=-ks; jj<=ks; ++jj){
-			kernel[ii+ks+(jj+ks)*k_size] = exp(-float(ii*ii+jj*jj));
+			kernel[ii+ks+(jj+ks)*k_size] = rand();
+			//kernel[ii+ks+(jj+ks)*k_size] = exp(-float(ii*ii+jj*jj));
 			norm += kernel[ii+ks+(jj+ks)*k_size];
 		}
 	}
@@ -200,13 +223,14 @@ int main()
 	displayKernel(kernel, k_size);
 	// compute blurred picture
 	B = kernelBlurring(I, kernel, k_size);
-
-	Vector<float> k = kernelEstimation(I, B, k_size);
+	Vector<float> k = kernelEstimation(I, B, k_size, kernel);
 	
 	// display window
-	openWindow(2*w, h);
-	display(B,0,0);
-	display(Nd,w,0);	
+	openWindow(3*w, h);
+	Vector<float> A = img2kernelMatrix(I, k_size)*kernel;
+	display(vect2img(A, w, h),0,0);
+	display(B,w,0);
+	display(Nd,2*w,0);	
 
 	endGraphics();
 	return 0;
