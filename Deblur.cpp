@@ -12,7 +12,7 @@ using namespace Imagine;
 using namespace std;
 
 // intensity functions ---------------------------------------
-Color intensity(Image<Color,2>& I, int i, int j){
+Color intensity(const Image<Color,2>& I, int i, int j){
 	if(i<0 || i>=I.width() || j<0 || j>=I.height()){
 		return Color(0,0,0);
 	}
@@ -20,7 +20,6 @@ Color intensity(Image<Color,2>& I, int i, int j){
 }
 
 float color2gray(Color c){
-	//cout << (c.r()/3.0+c.g()/3.0+c.b()/3.0)/256.0 << endl;
 	return (c.r()/3.0+c.g()/3.0+c.b()/3.0)/256.0;
 }
 
@@ -53,7 +52,7 @@ void displayKernel(Vector<float> k, int k_size){
 }
 
 // conversions functions ------------------------------------
-Vector<float> img2vect(Image<Color,2>& I){
+Vector<float> img2vect(const Image<Color,2>& I){
 	int i, j, w = I.width(), h = I.height();
 	Vector<float> If;
 	If.setSize(w*h);
@@ -81,7 +80,7 @@ Image<Color,2> vect2img(Vector<float>& I, int w, int h){
 	return Ic;
 }
 
-Matrix<float> img2kernelMatrix(Image<Color,2>& I, const int kernel_size){
+Matrix<float> img2kernelMatrix(const Image<Color,2>& I, const int kernel_size){
 	int i, j, ii, jj, w = I.width(), h = I.height();
 	Matrix<float> Imf;
 	Imf.setSize(w*h, kernel_size*kernel_size);
@@ -126,16 +125,36 @@ Image<Color,2> kernelBlurring(Image<Color,2>& I, Vector<float> k, const int kern
 	return Ik;
 }
 
+
 // algorithm ------------------------------------------------
-Vector<float> kernelEstimation(Image<Color,2>& I, Image<Color,2>& B, const int kernel_size, Vector<float> kernel){
+
+// projection for kernel estimation part
+void projection(Vector<float>& k){
+	int i;
+	float norm = 0;
+
+	for(i=0; i<k.size(); ++i){
+		k[i] = max(k[i], float(0));
+		norm += k[i];
+	}
+	if(norm > 0)
+	{
+		for(i=0; i<k.size(); ++i){
+			k[i] /= norm;
+		}
+	}
+}
+
+// kernel estimation
+Vector<float> kernelEstimation(const Image<Color,2>& I, const Image<Color,2>& B, const int kernel_size){
 	int i, j;
 	float k_size2 = kernel_size*kernel_size;
 	float norm;
 
 	// parameters
-	int niter = 30;						// number of iterations
-	float beta = 0.01;					// parameter for reccursive formula of k
-	float lambda = 5.0;					// smoothness parameter
+	int niter = 100000;						// number of iterations
+	float beta = 0.000001;					// parameter for reccursive formula of k
+	float lambda = 1;						// smoothness parameter
 	float lambda2 = lambda*lambda;
 	
 	// Vector_Matrix form
@@ -143,7 +162,6 @@ Vector<float> kernelEstimation(Image<Color,2>& I, Image<Color,2>& B, const int k
 	Vector<float> k;
 	k.setSize(kernel_size*kernel_size);
 	Matrix<float> A = img2kernelMatrix(I, kernel_size);
-	b = A*kernel;
 	Matrix<float> AtA = transpose(A)*A;
 	Vector<float> Atb = transpose(A)*b;
 
@@ -152,51 +170,54 @@ Vector<float> kernelEstimation(Image<Color,2>& I, Image<Color,2>& B, const int k
 		k[i] = 0;
 	}
 	k[kernel_size/2*(1 + kernel_size)] = 1;
-	displayKernel(k, kernel_size);
-	displayKernel(Atb-AtA*k, kernel_size);
 
 	// loop to find k
 	for(i=0; i<niter; ++i){
 		k = k + beta*(Atb -	AtA*k - lambda2*k);
-		// compute norm and positive coefficients
-		norm = 0;
-		for(j=0; j<k_size2; ++j){
-			k[j] = max(k[j],float(0));
-			norm += k[j];
-		}
-		cout << "------------------" << endl;
-		cout << norm << endl;
-		// normalize k
-		if(norm != 0){
-			k /= norm;
-		}
-		else{
-			for(j=0; j<k_size2; ++j){
-				k[j] = 1.0/k_size2;
-			}
-		}
-		displayKernel(k, kernel_size);
 	}
 
 	return k;
 }
 
-void deblur(Image<Color,2>& I, Image<Color,2>& B, Image<Color,2>& Nd){
-	int i, niter;
+// deconvolution algorithm
+void deconvol(Image<Color,2>& I, Image<Color,2>& B, Image<Color,2>& Nd, Vector<float> k){
+	int k_size = int(sqrt(float(k.size())));
+	int niter = 10;
+	int i;
+
+	// initialization of delta_pictures
+	Image<Color,2> deltaI = I - Nd;
+	Image<Color,2> deltaB = B - kernelBlurring(Nd, k, k_size);
+	
+	for(i = 0; i<niter; ++i){
+
+	}
+
+}
+
+// main algorithm
+void deblur(Image<Color,2>& I, const Image<Color,2>& B, const Image<Color,2>& Nd, int k_size){
+	int i;
+	int niter = 1;
 
 	for(i = 0; i<niter; ++i){
+		// estimate kernel with current picture
+		Vector<float> k = kernelEstimation(I, B, k_size);
+
+		// deconvolution of blurred picture
 
 	}
 	
 }
 
+// main -----------------------------------------------------
 int main()
 {
 	// Load and display images
 	Image<Color,2> B, Nd, I;
 	if( ! load(B, srcPath("lena_blurred.jpg")) ||
         ! load(Nd, srcPath("lena_denoised.jpg")) ||
-		! load(I, srcPath("lena_denoised.jpg")) ) {
+		! load(I, srcPath("lena.jpg")) ) {
         cerr<< "Unable to load images" << endl;
         return 1;
     }
@@ -211,26 +232,43 @@ int main()
 	kernel.setSize(k_size*k_size);
 	int ks = k_size/2;
 	float norm = 0;
+	
 	// initialize k as a gaussian
 	for(ii=-ks; ii<=ks; ++ii){
 		for(jj=-ks; jj<=ks; ++jj){
 			kernel[ii+ks+(jj+ks)*k_size] = rand();
-			//kernel[ii+ks+(jj+ks)*k_size] = exp(-float(ii*ii+jj*jj));
+			kernel[ii+ks+(jj+ks)*k_size] = exp(-float(ii*ii+jj*jj));
 			norm += kernel[ii+ks+(jj+ks)*k_size];
 		}
 	}
 	kernel /= norm;
-	displayKernel(kernel, k_size);
+
 	// compute blurred picture
 	B = kernelBlurring(I, kernel, k_size);
-	Vector<float> k = kernelEstimation(I, B, k_size, kernel);
-	
+
+	// estimate kernel
+	Vector<float> k = kernelEstimation(I, B, k_size);
+
+	// display kernels
+	// real kernel
+	displayKernel(kernel, k_size);
+	// estimated kernel
+	cout << "------------------" << endl;
+	projection(k);
+	displayKernel(k, k_size);
+	cout << "------------------" << endl;
+	// norm 2 of difference
+	cout << norm2(k-kernel)/norm2(kernel) << endl;
+	cout << "------------------" << endl;
+
 	// display window
-	openWindow(3*w, h);
-	Vector<float> A = img2kernelMatrix(I, k_size)*kernel;
-	display(vect2img(A, w, h),0,0);
+	openWindow(4*w, h);
+	Image<Color,2> A = kernelBlurring(I, kernel, k_size);
+	Image<Color,2> C = kernelBlurring(I, k, k_size);
+	display(A,0,0);
 	display(B,w,0);
-	display(Nd,2*w,0);	
+	display(C,2*w,0);
+	display(I,3*w,0);	
 
 	endGraphics();
 	return 0;
