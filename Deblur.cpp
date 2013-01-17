@@ -11,17 +11,24 @@
 using namespace Imagine;
 using namespace std;
 
-// Color operations
+// Color operations ------------------------------------------
 DoublePoint3 point(Color c){
 	return DoublePoint3(double(c.r()/255.0), double(c.g()/255.0), double(c.b()/255.0));
 }
 
  Color color(DoublePoint3 p){
+	p.x() = min(max(double(p.x()), 0.0), 1.0);
+	p.y() = min(max(double(p.y()), 0.0), 1.0);
+	p.z() = min(max(double(p.z()), 0.0), 1.0);
 	return Color(int(255*p.x()), int(255*p.y()), int(255*p.z()));
 }
 
-Color add(Color c1, Color c2){
-	return Color(c1.r()+c2.r(), c1.g()+c2.g(), c1.b()+c2.b()); 
+Color add(Color c1, Color c2, const int sign){
+	int r, g, b;
+	r = min(max(int(c1.r()+sign*c2.r()), 0), 255);
+	g = min(max(int(c1.g()+sign*c2.g()), 0), 255);
+	b = min(max(int(c1.b()+sign*c2.b()), 0), 255);
+	return Color(r, g, b); 
 }
 
 Color times(Color c1, float x){
@@ -36,6 +43,26 @@ DoublePoint3 divide(DoublePoint3 p1, DoublePoint3 p2){
 	return DoublePoint3(p1.x()/p2.x(), p1.y()/p2.y(), p1.z()/p2.z());
 }
 
+// pictures operations ---------------------------------------
+Image<Color,2> add(const Image<Color,2> &I1, const Image<Color,2> &I2, const int sign){
+	int x, y;
+	int w = I1.width(), h = I1.height();
+
+	if(I2.width() != w || I2.height() != h){
+		cout << "error in dimensions" << endl;
+		return I1;
+	}
+	
+	Image<Color,2> I(w, h);
+	for(x = 0; x<w; ++x){
+		for(y = 0; y<h; ++y){
+			I(x,y) = add(I1(x,y), I2(x,y), sign);
+		}
+	}
+
+	return I;
+}
+
 // intensity functions ---------------------------------------
 Color color(const Image<Color,2>& I, const int i, const int j){
 	if(i<0 || i>=I.width() || j<0 || j>=I.height()){
@@ -45,7 +72,7 @@ Color color(const Image<Color,2>& I, const int i, const int j){
 }
 
 float color2gray(const Color c){
-	return (c.r()/3.0+c.g()/3.0+c.b()/3.0)/256.0;
+	return (c.r()/3.0+c.g()/3.0+c.b()/3.0)/255.0;
 }
 
 // display functions -----------------------------------------
@@ -76,6 +103,40 @@ void displayKernel(const Vector<float> &k){
 		}
 		cout << endl;
 	}
+}
+
+void displayKernels(const Vector<float> &k1, const Vector<float> &k2){
+	int i,j, I, J;
+	int kernel_size = int(sqrt(float(k1.size())));
+	float m = 1.0, M = 0.0, c;
+	int factor = 20;
+	Image<Color,2> Im(2*factor*kernel_size, factor*kernel_size);
+	
+	for(i=0; i<kernel_size; ++i){
+		for(j=0; j<kernel_size; ++j){
+			m = min(k2[i+j*kernel_size], min(k1[i+j*kernel_size], m));
+			M = max(k2[i+j*kernel_size], max(k1[i+j*kernel_size], M));
+		}
+	}
+
+	for(i=0; i<kernel_size; ++i){
+		for(j=0; j<kernel_size; ++j){
+			c = (k1[i+j*kernel_size]-m)/(M-m);
+			for(I=0; I<factor; ++I){
+				for(J=0; J<factor; ++J){
+					Im(i*factor+I, j*factor+J) = color(DoublePoint3(c, c, c));
+				}
+			}
+			c = (k2[i+j*kernel_size]-m)/(M-m);
+			for(I=0; I<factor; ++I){
+				for(J=0; J<factor; ++J){
+					Im((i+kernel_size)*factor+I, j*factor+J) = color(DoublePoint3(c, c, c));
+				}
+			}
+		}
+	}
+
+	save(Im, "kernels.png");
 }
 
 // conversions functions ------------------------------------
@@ -151,6 +212,36 @@ Image<Color,2> kernelBlurring(const Image<Color,2>& I, const Vector<float>& k){
 	return Ik;
 }
 
+Image<Color,2> kernelBilateral(const Image<Color,2>& I, const Vector<float>& k, const float sigma){
+	int i, j, ii, jj;
+	int w = I.width(), h = I.height();
+	int kernel_size = int(sqrt(float(k.size())));
+	int ks = kernel_size/2;
+	float bilat, i_central, i_side, coeff_sum;
+	Color c;
+	DoublePoint3 sum;
+	Image<Color,2> Ik(w, h);
+
+	for(i=0; i<w; ++i){
+		for(j=0; j<h; ++j){
+			sum = DoublePoint3(0, 0, 0);
+			coeff_sum = 0.0;
+			i_central = 255*color2gray(color(I, i, j));
+			for(ii=-ks; ii<=ks; ++ii){
+				for(jj=-ks; jj<=ks; ++jj){
+					c = color(I, i+ii, j+jj);
+					i_side = 255*color2gray(c);
+					bilat = exp(-float(i_side*i_side-i_central*i_central)/sigma);
+					sum += point(c)*k[ii+ks+(jj+ks)*kernel_size]*bilat;
+					coeff_sum += k[ii+ks+(jj+ks)*kernel_size]*bilat;
+				}
+			}
+			Ik(i,j) = color(sum/coeff_sum);
+		}
+	}
+	return Ik;
+}
+
 
 // algorithm ------------------------------------------------
 
@@ -211,7 +302,7 @@ Vector<float> kernelEstimation(const Image<Color,2>& I, const Image<Color,2>& B,
 Color RLdeconv(const Image<Color,2>& u, const Image<Color,2>& b, const Image<Color,2>& c, const Vector<float> &k, const int x, const int y){
 	int kernel_size = int(sqrt(float(k.size())));
 	int i, j, I, J;
-	float kij, offset = 0.0;
+	float kij, offset = 1.0;
 	DoublePoint3 b_col, c_col, color_sum;
 
 	color_sum = DoublePoint3(0, 0, 0);
@@ -237,8 +328,8 @@ void deconvol(Image<Color,2>& I, const Image<Color,2>& B, const Image<Color,2>& 
 	int i, x, y, w = I.width(), h = I.height();
 
 	// initialization of delta_pictures
-	Image<Color,2> deltaI = I; - Nd;
-	Image<Color,2> deltaB = B; - kernelBlurring(Nd, k);
+	Image<Color,2> deltaI = add(I, Nd, -1);
+	Image<Color,2> deltaB = add(B, kernelBlurring(Nd, k), -1);
 	Image<Color,2> deltaInext(w, h);
 	Image<Color,2> deltaIblurred(w, h);
 	
@@ -258,8 +349,36 @@ void deconvol(Image<Color,2>& I, const Image<Color,2>& B, const Image<Color,2>& 
 			}
 		}
 	}
-
+	I = add(Nd, deltaInext, 1);
 }
+
+void deconvol(Image<Color,2>& I, const Image<Color,2>& B, const Vector<float>& k){
+	int kernel_size = int(sqrt(float(k.size())));
+	int niter = 10;
+	int i, x, y, w = I.width(), h = I.height();
+
+	// initialization of delta_pictures
+	Image<Color,2> Inext(w, h);
+	Image<Color,2> Iblurred(w, h);
+	
+	for(i = 0; i<niter; ++i){
+		// blur I
+		Iblurred = kernelBlurring(I, k);
+		// compute new delta I
+		for(x = 0; x<w; ++x){
+			for(y = 0; y<h; ++y){
+				Inext(x, y) = RLdeconv(I, B, Iblurred, k, x, y);
+			}
+		}
+		// update
+		for(x = 0; x<w; ++x){
+			for(y = 0; y<h; ++y){
+				I(x, y) = Inext(x, y);
+			}
+		}
+	}
+}
+
 
 // main algorithm
 Vector<float> deblur(Image<Color,2>& I, const Image<Color,2>& B, const Image<Color,2>& Nd,const int kernel_size, const Vector<float> &kernel){
@@ -282,7 +401,8 @@ Vector<float> deblur(Image<Color,2>& I, const Image<Color,2>& B, const Image<Col
 		cout << "norm difference: " << norm2(estimated_kernel-kernel)/norm2(kernel) << endl;
 
 		// deconvolution of blurred picture
-		deconvol(I, B, Nd, estimated_kernel);
+		//deconvol(I, B, Nd, estimated_kernel);
+		deconvol(I, B, kernel);
 	}
 	return estimated_kernel;
 }
@@ -291,8 +411,9 @@ Vector<float> deblur(Image<Color,2>& I, const Image<Color,2>& B, const Image<Col
 int main()
 {
 	// Load and display images
-	Image<Color,2> B, estimated_blur, Nd, original, I;
+	Image<Color,2> B, estimated_blur, noisy_blur, Nd, original, I, N;
 	if( ! load(B, srcPath("lena_blurred.jpg")) ||
+		! load(N, srcPath("lena_noisy.jpg")) ||
         ! load(Nd, srcPath("lena_denoised.jpg")) ||
 		! load(original, srcPath("lena.jpg")) ||
 		! load(I, srcPath("lena_denoised.jpg"))) {
@@ -302,20 +423,20 @@ int main()
 	int w = B.width();
 	int h = B.height();
 
-	int kernel_size = 5;
+	int kernel_size = 25;
 
 	// create blur kernel
 	int ii, jj;
-	Vector<float> kernel, estimated_kernel;
+	Vector<float> kernel, estimated_kernel, kernel_bilat;
 	kernel.setSize(kernel_size*kernel_size);
 	int ks = kernel_size/2;
 	float norm = 0;
 	
-	// initialize k as a gaussian
+	// random kernel
 	for(ii=-ks; ii<=ks; ++ii){
 		for(jj=-ks; jj<=ks; ++jj){
 			kernel[ii+ks+(jj+ks)*kernel_size] = rand();
-			kernel[ii+ks+(jj+ks)*kernel_size] = exp(-float(ii*ii+jj*jj));
+			//kernel[ii+ks+(jj+ks)*kernel_size] = exp(-float(ii*ii+jj*jj));
 			norm += kernel[ii+ks+(jj+ks)*kernel_size];
 		}
 	}
@@ -324,16 +445,44 @@ int main()
 	// compute blurred picture
 	B = kernelBlurring(original, kernel);
 
+	// compute denoised picture
+	kernel_bilat.setSize(kernel_size*kernel_size);
+	norm = 0;
+	for(ii=-ks; ii<=ks; ++ii){
+		for(jj=-ks; jj<=ks; ++jj){
+			kernel_bilat[ii+ks+(jj+ks)*kernel_size] = exp(-float(ii*ii+jj*jj)/2);
+			norm += kernel_bilat[ii+ks+(jj+ks)*kernel_size];
+		}
+	}
+	kernel_bilat/=norm;
+	Nd = kernelBlurring(Nd, kernel_bilat);//kernelBilateral(N, kernel_bilat, 2.0);
+
 	// deblur picture
 	estimated_kernel = deblur(I, B, Nd, kernel_size, kernel);
-	estimated_blur = kernelBlurring(I, estimated_kernel);
+	estimated_blur = kernelBlurring(original, estimated_kernel);
+	noisy_blur = kernelBlurring(Nd, estimated_kernel);
 
+	//load(I, srcPath("lena_blurred.jpg"));
+	//deconvol(I, B, kernel);
+	
+	// display kernels pictures
+	displayKernels(kernel, estimated_kernel);
+	
 	// display window
-	openWindow(2*w, 2*h);
+	openWindow(3*w, 2*h);
 	display(original,0,0);
-	display(I,w,0);	
+	display(I,w,0);
+	display(N,2*w,0);
 	display(B,0,h);
 	display(estimated_blur,w,h);
+	display(Nd,2*w,h);
+
+	// save pictures
+	save(original, "original.png");
+	save(N, "noisy.png");
+	save(B, "blurred.png");
+	save(Nd, "denoised.png");
+	save(I, "estimation.png");
 	
 
 	endGraphics();
