@@ -217,7 +217,7 @@ Image<Color,2> kernelBilateral(const Image<Color,2>& I, const Vector<float>& k, 
 	int w = I.width(), h = I.height();
 	int kernel_size = int(sqrt(float(k.size())));
 	int ks = kernel_size/2;
-	float bilat, i_central, i_side, coeff_sum;
+	float bilat, i_central, i_side, coeff_sum, invS2 = 1/(sigma*sigma);
 	Color c;
 	DoublePoint3 sum;
 	Image<Color,2> Ik(w, h);
@@ -226,12 +226,12 @@ Image<Color,2> kernelBilateral(const Image<Color,2>& I, const Vector<float>& k, 
 		for(j=0; j<h; ++j){
 			sum = DoublePoint3(0, 0, 0);
 			coeff_sum = 0.0;
-			i_central = 255*color2gray(color(I, i, j));
+			i_central = color2gray(color(I, i, j));
 			for(ii=-ks; ii<=ks; ++ii){
 				for(jj=-ks; jj<=ks; ++jj){
 					c = color(I, i+ii, j+jj);
-					i_side = 255*color2gray(c);
-					bilat = exp(-float(i_side*i_side-i_central*i_central)/sigma);
+					i_side = color2gray(c);
+					bilat = exp(-float(i_side*i_side-i_central*i_central)*invS2);
 					sum += point(c)*k[ii+ks+(jj+ks)*kernel_size]*bilat;
 					coeff_sum += k[ii+ks+(jj+ks)*kernel_size]*bilat;
 				}
@@ -423,7 +423,7 @@ int main()
 	int w = B.width();
 	int h = B.height();
 
-	int kernel_size = 25;
+	int kernel_size = 5;
 
 	// create blur kernel
 	int ii, jj;
@@ -433,10 +433,10 @@ int main()
 	float norm = 0;
 	
 	// random kernel
+	 srand (time(NULL));
 	for(ii=-ks; ii<=ks; ++ii){
 		for(jj=-ks; jj<=ks; ++jj){
 			kernel[ii+ks+(jj+ks)*kernel_size] = rand();
-			//kernel[ii+ks+(jj+ks)*kernel_size] = exp(-float(ii*ii+jj*jj));
 			norm += kernel[ii+ks+(jj+ks)*kernel_size];
 		}
 	}
@@ -455,16 +455,13 @@ int main()
 		}
 	}
 	kernel_bilat/=norm;
-	Nd = kernelBlurring(Nd, kernel_bilat);//kernelBilateral(N, kernel_bilat, 2.0);
+	Nd = kernelBilateral(N, kernel_bilat, 1);
 
 	// deblur picture
 	estimated_kernel = deblur(I, B, Nd, kernel_size, kernel);
 	estimated_blur = kernelBlurring(original, estimated_kernel);
 	noisy_blur = kernelBlurring(Nd, estimated_kernel);
 
-	//load(I, srcPath("lena_blurred.jpg"));
-	//deconvol(I, B, kernel);
-	
 	// display kernels pictures
 	displayKernels(kernel, estimated_kernel);
 	
