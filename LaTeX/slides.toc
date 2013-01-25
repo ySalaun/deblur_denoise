@@ -1,0 +1,10 @@
+\beamer@endinputifotherversion {3.26pt}
+\select@language {english}
+\beamer@sectionintoc {1}{Introduction}{3}{0}{1}
+\beamer@sectionintoc {2}{Algorithm Overview}{5}{0}{2}
+\beamer@sectionintoc {3}{Theoretical Description}{7}{0}{3}
+\beamer@subsectionintoc {3}{1}{Initialization}{8}{0}{3}
+\beamer@subsectionintoc {3}{2}{Kernel Estimation}{9}{0}{3}
+\beamer@subsectionintoc {3}{3}{Deconvolution}{16}{0}{3}
+\beamer@subsectionintoc {3}{4}{De-ringing}{19}{0}{3}
+\beamer@sectionintoc {4}{Results}{25}{0}{4}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2012.10.11)  17 JAN 2013 20:30
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2012.10.11)  24 JAN 2013 10:25
 entering extended mode
 **report.tex
 (C:\Users\Yohann\Documents\GitHub\deblur_denoise\LaTeX\report.tex
@@ -336,7 +336,60 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amssymb.sty"
 Package: amssymb 2009/06/22 v3.00
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\algorithm2e\algorithm2e.sty"
+Package: algorithm2e 2013/01/06 v5.00 algorithms environments
+\c@AlgoLine=\count100
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\ifthen.sty"
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\xspace.sty"
+Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\ltxmisc\relsize.sty"
+Package: relsize 2003/07/04 ver 3.1
+)
+********************************************************
+Package `algorithm2e' Release 5.0 -- january 06 2013 --
+- algorithm2e-announce@lirmm.fr mailing list for announcement about releases
+- algorithm2e-discussion@lirmm.fr mailing list for discussion about package
+subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
+- Author: Christophe Fiorio (cfiorio@um2.fr)
+********************************************************
+\skiptotal=\skip46
+\skiplinenumber=\skip47
+\skiprule=\skip48
+\skiphlne=\skip49
+\skiptext=\skip50
+\skiplength=\skip51
+\algomargin=\skip52
+\skipalgocfslide=\skip53
+\algowidth=\dimen113
+\inoutsize=\dimen114
+\inoutindent=\dimen115
+\interspacetitleruled=\dimen116
+\interspacealgoruled=\dimen117
+\interspacetitleboxruled=\dimen118
+\algocf@inoutbox=\box28
+\algocf@inputbox=\box29
+\AlCapSkip=\skip54
+\AlCapHSkip=\skip55
+\algoskipindent=\skip56
+\algocf@nlbox=\box30
+\algocf@hangingbox=\box31
+\algocf@untilbox=\box32
+\algocf@skipuntil=\skip57
+\algocf@capbox=\box33
+\algoheightruledefault=\skip58
+\algoheightrule=\skip59
+\algotitleheightruledefault=\skip60
+\algotitleheightrule=\skip61
+\c@algocfline=\count101
+\c@algocfproc=\count102
+\c@algocf=\count103
+\algocf@algoframe=\box34
+\algocf@algobox=\box35
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
@@ -363,52 +416,44 @@ Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
-\Gread@gobject=\count100
+\Gread@gobject=\count104
 ))
-\Gin@req@height=\dimen113
-\Gin@req@width=\dimen114
+\Gin@req@height=\dimen119
+\Gin@req@width=\dimen120
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psfrag\psfrag.sty"
 Package: psfrag 1998/04/11 v3.04 PSfrag (MCG)
-\pfg@pcount=\count101
-\pfg@scount=\count102
+\pfg@pcount=\count105
+\pfg@scount=\count106
 \pfg@temp=\write3
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\epsfig.sty"
 Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
-\epsfxsize=\dimen115
-\epsfysize=\dimen116
+\epsfxsize=\dimen121
+\epsfysize=\dimen122
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\tools\multicol.sty"
 Package: multicol 2011/06/27 v1.7a multicolumn formatting (FMi)
-\c@tracingmulticols=\count103
-\mult@box=\box28
-\multicol@leftmargin=\dimen117
-\c@unbalance=\count104
-\c@collectmore=\count105
-\doublecol@number=\count106
-\multicoltolerance=\count107
-\multicolpretolerance=\count108
-\full@width=\dimen118
-\page@free=\dimen119
-\premulticols=\dimen120
-\postmulticols=\dimen121
-\multicolsep=\skip46
-\multicolbaselineskip=\skip47
-\partial@page=\box29
-\last@line=\box30
-\mult@rightbox=\box31
-\mult@grightbox=\box32
-\mult@gfirstbox=\box33
-\mult@firstbox=\box34
-\@tempa=\box35
-\@tempa=\box36
-\@tempa=\box37
-\@tempa=\box38
-\@tempa=\box39
-\@tempa=\box40
-\@tempa=\box41
-\@tempa=\box42
+\c@tracingmulticols=\count107
+\mult@box=\box36
+\multicol@leftmargin=\dimen123
+\c@unbalance=\count108
+\c@collectmore=\count109
+\doublecol@number=\count110
+\multicoltolerance=\count111
+\multicolpretolerance=\count112
+\full@width=\dimen124
+\page@free=\dimen125
+\premulticols=\dimen126
+\postmulticols=\dimen127
+\multicolsep=\skip62
+\multicolbaselineskip=\skip63
+\partial@page=\box37
+\last@line=\box38
+\mult@rightbox=\box39
+\mult@grightbox=\box40
+\mult@gfirstbox=\box41
+\mult@firstbox=\box42
 \@tempa=\box43
 \@tempa=\box44
 \@tempa=\box45
@@ -418,14 +463,22 @@ Package: multicol 2011/06/27 v1.7a multicolumn formatting (FMi)
 \@tempa=\box49
 \@tempa=\box50
 \@tempa=\box51
-\c@columnbadness=\count109
-\c@finalcolumnbadness=\count110
-\last@try=\dimen122
-\multicolovershoot=\dimen123
-\multicolundershoot=\dimen124
-\mult@nat@firstbox=\box52
-\colbreak@box=\box53
-\multicol@sort@counter=\count111
+\@tempa=\box52
+\@tempa=\box53
+\@tempa=\box54
+\@tempa=\box55
+\@tempa=\box56
+\@tempa=\box57
+\@tempa=\box58
+\@tempa=\box59
+\c@columnbadness=\count113
+\c@finalcolumnbadness=\count114
+\last@try=\dimen128
+\multicolovershoot=\dimen129
+\multicolundershoot=\dimen130
+\mult@nat@firstbox=\box60
+\colbreak@box=\box61
+\multicol@sort@counter=\count115
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\cite\cite.sty"
 LaTeX Info: Redefining \cite on input line 302.
@@ -448,35 +501,35 @@ Package: caption 2013/01/06 v3.3 Customizing captions (AR)
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\caption\caption3.sty"
 Package: caption3 2013/01/06 v1.5 caption3 kernel (AR)
-\captionmargin=\dimen125
-\captionmargin@=\dimen126
-\captionwidth=\dimen127
-\caption@tempdima=\dimen128
-\caption@indent=\dimen129
-\caption@parindent=\dimen130
-\caption@hangindent=\dimen131
+\captionmargin=\dimen131
+\captionmargin@=\dimen132
+\captionwidth=\dimen133
+\caption@tempdima=\dimen134
+\caption@indent=\dimen135
+\caption@parindent=\dimen136
+\caption@hangindent=\dimen137
 )
-\c@ContinuedFloat=\count112
+\c@ContinuedFloat=\count116
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\listings.sty"
-\lst@mode=\count113
-\lst@gtempboxa=\box54
+\lst@mode=\count117
+\lst@gtempboxa=\box62
 \lst@token=\toks22
-\lst@length=\count114
-\lst@currlwidth=\dimen132
-\lst@column=\count115
-\lst@pos=\count116
-\lst@lostspace=\dimen133
-\lst@width=\dimen134
-\lst@newlines=\count117
-\lst@lineno=\count118
-\lst@maxwidth=\dimen135
+\lst@length=\count118
+\lst@currlwidth=\dimen138
+\lst@column=\count119
+\lst@pos=\count120
+\lst@lostspace=\dimen139
+\lst@width=\dimen140
+\lst@newlines=\count121
+\lst@lineno=\count122
+\lst@maxwidth=\dimen141
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
 File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
-\c@lstnumber=\count119
-\lst@skipnumbers=\count120
-\lst@framebox=\box55
+\c@lstnumber=\count123
+\lst@skipnumbers=\count124
+\lst@framebox=\box63
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\listings.cfg"
 File: listings.cfg 2007/02/22 1.4 listings configuration
@@ -656,61 +709,61 @@ Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 338.
 Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 339.
 Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 340.
 )
-\c@thm=\count121
-\c@prop=\count122
-\c@lemma=\count123
-\c@defn=\count124
-\c@cor=\count125
-\c@model=\count126
-\c@rmk=\count127
-\c@ans=\count128
-\c@ass=\count129
-\c@algo=\count130
+\c@thm=\count125
+\c@prop=\count126
+\c@lemma=\count127
+\c@defn=\count128
+\c@cor=\count129
+\c@model=\count130
+\c@rmk=\count131
+\c@ans=\count132
+\c@ass=\count133
+\c@algo=\count134
 
 (C:\Users\Yohann\Documents\GitHub\deblur_denoise\LaTeX\report.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 53.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 53.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 63.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 63.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    ... okay on input line 63.
 
 ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count131
-\scratchdimen=\dimen136
-\scratchbox=\box56
-\nofMPsegments=\count132
-\nofMParguments=\count133
+\scratchcounter=\count135
+\scratchdimen=\dimen142
+\scratchbox=\box64
+\nofMPsegments=\count136
+\nofMParguments=\count137
 \everyMPshowfont=\toks23
-\MPscratchCnt=\count134
-\MPscratchDim=\dimen137
-\MPnumerator=\count135
-\makeMPintoPDFobject=\count136
+\MPscratchCnt=\count138
+\MPscratchDim=\dimen143
+\MPnumerator=\count139
+\makeMPintoPDFobject=\count140
 \everyMPtoPDFconversion=\toks24
 )
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count137
-LaTeX Font Info:    Try loading font information for U+msa on input line 54.
+\c@lstlisting=\count141
+LaTeX Font Info:    Try loading font information for U+msa on input line 64.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 54.
+LaTeX Font Info:    Try loading font information for U+msb on input line 64.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -718,41 +771,273 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 <images/lena_noisy.jpg, id=1, 513.92pt x 513.92pt>
 File: images/lena_noisy.jpg Graphic file (type jpg)
  <use images/lena_noisy.jpg>
-Package pdftex.def Info: images/lena_noisy.jpg used on input line 63.
-(pdftex.def)             Requested size: 205.56435pt x 205.56435pt.
+Package pdftex.def Info: images/lena_noisy.jpg used on input line 74.
+(pdftex.def)             Requested size: 143.8966pt x 143.8966pt.
 
 <images/lena_blurred.jpg, id=2, 513.92pt x 513.92pt>
 File: images/lena_blurred.jpg Graphic file (type jpg)
 
 <use images/lena_blurred.jpg>
-Package pdftex.def Info: images/lena_blurred.jpg used on input line 64.
-(pdftex.def)             Requested size: 205.56435pt x 205.56435pt.
+Package pdftex.def Info: images/lena_blurred.jpg used on input line 75.
+(pdftex.def)             Requested size: 143.8966pt x 143.8966pt.
+ <images/lena.jpg, id=3, 513.92pt x 513.92pt>
+File: images/lena.jpg Graphic file (type jpg)
+
+<use images/lena.jpg>
+Package pdftex.def Info: images/lena.jpg used on input line 76.
+(pdftex.def)             Requested size: 143.8966pt x 143.8966pt.
  [1
 Non-PDF special ignored!
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/Yohann/Documents
 /GitHub/deblur_denoise/LaTeX/images/lena_noisy.jpg> <C:/Users/Yohann/Documents/
-GitHub/deblur_denoise/LaTeX/images/lena_blurred.jpg>]
+GitHub/deblur_denoise/LaTeX/images/lena_blurred.jpg> <C:/Users/Yohann/Documents
+/GitHub/deblur_denoise/LaTeX/images/lena.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 90--91
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--116
+
+ []
+
+<images/enhanced.jpg, id=12, 804.00375pt x 286.82156pt>
+File: images/enhanced.jpg Graphic file (type jpg)
+
+<use images/enhanced.jpg>
+Package pdftex.def Info: images/enhanced.jpg used on input line 120.
+(pdftex.def)             Requested size: 402.0009pt x 143.41042pt.
+ [2 <C:/Users/Yohann/Documents/GitHub/deblur_denoise/LaTeX/images/enhanced.jpg>
+] <images/noisy.png, id=23, 385.44pt x 385.44pt>
+File: images/noisy.png Graphic file (type png)
+
+<use images/noisy.png>
+Package pdftex.def Info: images/noisy.png used on input line 135.
+(pdftex.def)             Requested size: 134.90602pt x 134.90602pt.
+ <images/denoised.png, id=24, 385.44pt x 385.44pt>
+File: images/denoised.png Graphic file (type png)
+
+<use images/denoised.png>
+Package pdftex.def Info: images/denoised.png used on input line 136.
+(pdftex.def)             Requested size: 134.90602pt x 134.90602pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 174--177
+
+ []
+
+[3 <C:/Users/Yohann/Documents/GitHub/deblur_denoise/LaTeX/images/noisy.png> <C:
+/Users/Yohann/Documents/GitHub/deblur_denoise/LaTeX/images/denoised.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 185--187
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 194--198
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 209--212
+
+ []
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 217--221
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 231--233
+
+ []
+
+<images/blurred_5px.png, id=37, 150.5625pt x 150.5625pt>
+File: images/blurred_5px.png Graphic file (type png)
+
+<use images/blurred_5px.png>
+Package pdftex.def Info: images/blurred_5px.png used on input line 237.
+(pdftex.def)             Requested size: 150.56212pt x 150.56212pt.
+
+<images/denoised_5px.png, id=38, 150.5625pt x 150.5625pt>
+File: images/denoised_5px.png Graphic file (type png)
+
+<use images/denoised_5px.png>
+Package pdftex.def Info: images/denoised_5px.png used on input line 238.
+(pdftex.def)             Requested size: 150.56212pt x 150.56212pt.
+
+<images/original_5px.png, id=39, 150.5625pt x 150.5625pt>
+File: images/original_5px.png Graphic file (type png)
+
+<use images/original_5px.png>
+Package pdftex.def Info: images/original_5px.png used on input line 239.
+(pdftex.def)             Requested size: 150.56212pt x 150.56212pt.
+
+<images/estimation_5px.png, id=40, 150.5625pt x 150.5625pt>
+File: images/estimation_5px.png Graphic file (type png)
+
+<use images/estimation_5px.png>
+Package pdftex.def Info: images/estimation_5px.png used on input line 240.
+(pdftex.def)             Requested size: 150.56212pt x 150.56212pt.
+
+<images/kernels_5px.png, id=41, 150.5625pt x 75.28125pt>
+File: images/kernels_5px.png Graphic file (type png)
+
+<use images/kernels_5px.png>
+Package pdftex.def Info: images/kernels_5px.png used on input line 241.
+(pdftex.def)             Requested size: 150.56212pt x 75.28105pt.
+
+<images/blurred_9px.png, id=42, 150.5625pt x 150.5625pt>
+File: images/blurred_9px.png Graphic file (type png)
+
+<use images/blurred_9px.png>
+Package pdftex.def Info: images/blurred_9px.png used on input line 251.
+(pdftex.def)             Requested size: 150.56212pt x 150.56212pt.
+
+<images/denoised_9px.png, id=43, 150.5625pt x 150.5625pt>
+File: images/denoised_9px.png Graphic file (type png)
+
+<use images/denoised_9px.png>
+Package pdftex.def Info: images/denoised_9px.png used on input line 252.
+(pdftex.def)             Requested size: 150.56212pt x 150.56212pt.
+File: images/original_5px.png Graphic file (type png)
+ <use images/original_5px.png>
+Package pdftex.def Info: images/original_5px.png used on input line 253.
+(pdftex.def)             Requested size: 150.56212pt x 150.56212pt.
+
+<images/estimation_9px.png, id=44, 150.5625pt x 150.5625pt>
+File: images/estimation_9px.png Graphic file (type png)
+
+<use images/estimation_9px.png>
+Package pdftex.def Info: images/estimation_9px.png used on input line 254.
+(pdftex.def)             Requested size: 150.56212pt x 150.56212pt.
+
+<images/kernels_9px.png, id=45, 271.0125pt x 135.50626pt>
+File: images/kernels_9px.png Graphic file (type png)
+
+<use images/kernels_9px.png>
+Package pdftex.def Info: images/kernels_9px.png used on input line 255.
+(pdftex.def)             Requested size: 189.70744pt x 94.85371pt.
+File: images/estimation_5px.png Graphic file (type png)
+ <use images/estimation_5px.png>
+Package pdftex.def Info: images/estimation_5px.png used on input line 265.
+(pdftex.def)             Requested size: 150.56212pt x 150.56212pt.
+
+<images/estimation_0.png, id=46, 150.5625pt x 150.5625pt>
+File: images/estimation_0.png Graphic file (type png)
+
+<use images/estimation_0.png>
+Package pdftex.def Info: images/estimation_0.png used on input line 266.
+(pdftex.def)             Requested size: 150.56212pt x 150.56212pt.
+
+<images/estimation_N.png, id=47, 150.5625pt x 150.5625pt>
+File: images/estimation_N.png Graphic file (type png)
+
+<use images/estimation_N.png>
+Package pdftex.def Info: images/estimation_N.png used on input line 267.
+(pdftex.def)             Requested size: 150.56212pt x 150.56212pt.
+File: images/kernels_5px.png Graphic file (type png)
+ <use images/kernels_5px.png>
+Package pdftex.def Info: images/kernels_5px.png used on input line 268.
+(pdftex.def)             Requested size: 150.56212pt x 75.28105pt.
+
+<images/kernels_0.png, id=48, 150.5625pt x 75.28125pt>
+File: images/kernels_0.png Graphic file (type png)
+
+<use images/kernels_0.png>
+Package pdftex.def Info: images/kernels_0.png used on input line 269.
+(pdftex.def)             Requested size: 150.56212pt x 75.28105pt.
+
+<images/kernels_N.png, id=49, 150.5625pt x 75.28125pt>
+File: images/kernels_N.png Graphic file (type png)
+
+<use images/kernels_N.png>
+Package pdftex.def Info: images/kernels_N.png used on input line 270.
+(pdftex.def)             Requested size: 150.56212pt x 75.28105pt.
+
+Overfull \hbox (9.41846pt too wide) in paragraph at lines 264--272
+ [] 
+ []
+
+<images/blurred_15_5.png, id=50, 150.5625pt x 150.5625pt>
+File: images/blurred_15_5.png Graphic file (type png)
+
+<use images/blurred_15_5.png>
+Package pdftex.def Info: images/blurred_15_5.png used on input line 280.
+(pdftex.def)             Requested size: 150.56212pt x 150.56212pt.
+
+<images/estimation_15_5.png, id=51, 150.5625pt x 150.5625pt>
+File: images/estimation_15_5.png Graphic file (type png)
+
+<use images/estimation_15_5.png>
+Package pdftex.def Info: images/estimation_15_5.png used on input line 281.
+(pdftex.def)             Requested size: 150.56212pt x 150.56212pt.
+
+<images/blurred_3_9.png, id=52, 150.5625pt x 150.5625pt>
+File: images/blurred_3_9.png Graphic file (type png)
+
+<use images/blurred_3_9.png>
+Package pdftex.def Info: images/blurred_3_9.png used on input line 282.
+(pdftex.def)             Requested size: 150.56212pt x 150.56212pt.
+
+<images/estimation_3_9.png, id=53, 150.5625pt x 150.5625pt>
+File: images/estimation_3_9.png Graphic file (type png)
+
+<use images/estimation_3_9.png>
+Package pdftex.def Info: images/estimation_3_9.png used on input line 283.
+(pdftex.def)             Requested size: 150.56212pt x 150.56212pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 291--292
+
+ []
+
+[5] [6 <C:/Users/Yohann/Documents/GitHub/deblur_denoise/LaTeX/images/blurred_5p
+x.png> <C:/Users/Yohann/Documents/GitHub/deblur_denoise/LaTeX/images/denoised_5
+px.png> <C:/Users/Yohann/Documents/GitHub/deblur_denoise/LaTeX/images/original_
+5px.png> <C:/Users/Yohann/Documents/GitHub/deblur_denoise/LaTeX/images/estimati
+on_5px.png> <C:/Users/Yohann/Documents/GitHub/deblur_denoise/LaTeX/images/kerne
+ls_5px.png>] [7 <C:/Users/Yohann/Documents/GitHub/deblur_denoise/LaTeX/images/b
+lurred_9px.png> <C:/Users/Yohann/Documents/GitHub/deblur_denoise/LaTeX/images/d
+enoised_9px.png> <C:/Users/Yohann/Documents/GitHub/deblur_denoise/LaTeX/images/
+estimation_9px.png> <C:/Users/Yohann/Documents/GitHub/deblur_denoise/LaTeX/imag
+es/kernels_9px.png>] [8 <C:/Users/Yohann/Documents/GitHub/deblur_denoise/LaTeX/
+images/estimation_0.png> <C:/Users/Yohann/Documents/GitHub/deblur_denoise/LaTeX
+/images/estimation_N.png> <C:/Users/Yohann/Documents/GitHub/deblur_denoise/LaTe
+X/images/kernels_0.png> <C:/Users/Yohann/Documents/GitHub/deblur_denoise/LaTeX/
+images/kernels_N.png>] [9 <C:/Users/Yohann/Documents/GitHub/deblur_denoise/LaTe
+X/images/blurred_15_5.png> <C:/Users/Yohann/Documents/GitHub/deblur_denoise/LaT
+eX/images/estimation_15_5.png> <C:/Users/Yohann/Documents/GitHub/deblur_denoise
+/LaTeX/images/blurred_3_9.png> <C:/Users/Yohann/Documents/GitHub/deblur_denoise
+/LaTeX/images/estimation_3_9.png>]
 (C:\Users\Yohann\Documents\GitHub\deblur_denoise\LaTeX\report.aux) ) 
 Here is how much of TeX's memory you used:
- 6255 strings out of 494045
- 85568 string characters out of 3145965
- 142756 words of memory out of 3000000
- 9461 multiletter control sequences out of 15000+200000
- 11234 words of font info for 44 fonts, out of 3000000 for 9000
+ 7763 strings out of 494045
+ 107780 string characters out of 3145965
+ 192355 words of memory out of 3000000
+ 10932 multiletter control sequences out of 15000+200000
+ 12468 words of font info for 48 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 36i,13n,38p,590b,371s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,13n,38p,588b,372s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program
- Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy
-7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on report.pdf (1 page, 515276 bytes).
+ Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmbx5.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/cm/cmbx7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+mmi5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb>
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Progr
+am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmti10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbo
+ls/msbm10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/
+msbm7.pfb>
+Output written on report.pdf (9 pages, 3802864 bytes).
 PDF statistics:
- 40 PDF objects out of 1000 (max. 8388607)
+ 123 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 116 words of extra memory for PDF output out of 10000 (max. 10000000)
 

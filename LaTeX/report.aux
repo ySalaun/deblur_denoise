@@ -1,12 +1,45 @@
 \relax 
 \citation{deblur_denoise}
-\bibcite{deblur_denoise}{1}
+\citation{deblur_denoise}
 \select@language{english}
 \@writefile{toc}{\select@language{english}}
 \@writefile{lof}{\select@language{english}}
 \@writefile{lot}{\select@language{english}}
-\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces De gauche \IeC {\`a} droite, l'image originale, bruit\IeC {\'e}e avec un bruit d\IeC {\'e}cart type 10 puis d\IeC {\'e}bruit\IeC {\'e}e avec $\mu = 2$, $\epsilon = 10^{-4}$.\relax }}{1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces On the left, the noisy picture and on the center the blurry one. Both of these pictures have been virtually altered from the left one.\relax }}{1}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{surfplot}{{1}{1}}
-\@writefile{toc}{\contentsline {section}{\numberline {2}References}{1}}
+\newlabel{intro}{{1}{1}}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Algorithm Overview}{2}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Main algorithm\relax }}{2}}
+\@writefile{toc}{\contentsline {section}{\numberline {2} Theoretical Description }{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1} Initialization }{2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces On the left, the blurry picture and on the center the noisy one. The left one is the noisy picture multiplied by the exposure ratio in order to have comparable intensity measures between the blurry and noisy pictures.\relax }}{2}}
+\newlabel{enhanced}{{2}{2}}
+\citation{deblur_denoise}
+\citation{rough_denoise}
+\citation{deblur_denoise}
+\citation{deblur_denoise}
+\citation{deblur_denoise}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces On the left, the noisy picture and on the right the denoised picture obtained with a simple bilateral filter.\relax }}{3}}
+\newlabel{noisy}{{3}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2} Kernel Estimation }{3}}
+\newlabel{kernel_eq}{{1}{3}}
+\newlabel{kernel_eq2}{{2}{3}}
+\citation{deblur_denoise}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Deconvolution}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}De-ringing}{4}}
+\citation{deblur_denoise}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Results}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces On the top left, the blurred picture obtained with a $5\times 5$ kernel and on top the right the denoised picture obtained with a simple bilateral filter. The bottom left is the original picture and the right one is the estimation obtained with the algorithm. The last picture is a comparison between the original blur kernel on the left and its estimation on the right.\relax }}{6}}
+\newlabel{lena_5px}{{4}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces On the top left, the blurred picture obtained with a $9\times 9$ kernel and on top the right the denoised picture obtained with a simple bilateral filter. The bottom left is the original picture and the right one is the estimation obtained with the algorithm.The last picture is a comparison between the original blur kernel on the left and its estimation on the right.\relax }}{7}}
+\newlabel{lena_9px}{{5}{7}}
+\citation{deblur_denoise}
+\citation{deblur_denoise}
+\bibcite{rough_denoise}{1}
+\bibcite{deblur_R}{2}
+\bibcite{deblur_denoise}{3}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Comparison of results obtained with different initialization for \textbf  {I}. From left to right, $\textbf  {I}^0 = \textbf  {N$_d$},\ \textbf  {I}^0 = 0,\ \textbf  {I}^0 = \textbf  {N}$ \relax }}{8}}
+\newlabel{init}{{6}{8}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Conclusion}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Leftward pictures are blurry inputs and rightward ones are estimations. Comparison of results obtained with differences between real kernel size and estimated kernel size. Up pictures are obtained with a real kernel size of 15 pixels and an estimated one of 5 pixels. Bottom pictures are obtained with a real kernel size of 3 pixels and an estimated one of 9 pixels. \relax }}{9}}
+\newlabel{kernel_size}{{7}{9}}

@@ -1,8 +1,26 @@
+/*  Scanline optimization.
+    Copyright (C) 2012-2013 Yohann Salaun <yohann.salaun@polytechnique.org>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 // Imagine++ project
 // Project:  Deblur
 // Author:   Yohann Salaun
 // Date:     2012/12/25
 
+#include <sstream>
 #include <Imagine/Images.h>
 #include <Imagine/Graphics.h>
 #include <vector>
@@ -16,7 +34,7 @@ DoublePoint3 point(Color c){
 	return DoublePoint3(double(c.r()/255.0), double(c.g()/255.0), double(c.b()/255.0));
 }
 
- Color color(DoublePoint3 p){
+Color color(DoublePoint3 p){
 	p.x() = min(max(double(p.x()), 0.0), 1.0);
 	p.y() = min(max(double(p.y()), 0.0), 1.0);
 	p.z() = min(max(double(p.z()), 0.0), 1.0);
@@ -312,8 +330,11 @@ Color RLdeconv(const Image<Color,2>& u, const Image<Color,2>& b, const Image<Col
 			J = j - kernel_size/2;
 			
 			kij = k[-I+kernel_size/2+(-J+kernel_size/2)*kernel_size];
+			//kij = k[i+j*kernel_size];
 			b_col = point(color(b, x+I, y+J))+offset;
 			c_col = point(color(c, x+I, y+J))+offset;
+			//b_col = point(color(b, x+i, y+j))+offset;
+			//c_col = point(color(c, x+i, y+j))+offset;
 			
 			color_sum += kij*divide(b_col, c_col);
 		}
@@ -403,6 +424,14 @@ Vector<float> deblur(Image<Color,2>& I, const Image<Color,2>& B, const Image<Col
 		// deconvolution of blurred picture
 		//deconvol(I, B, Nd, estimated_kernel);
 		deconvol(I, B, kernel);
+
+		// créer un flux de sortie
+		std::ostringstream oss;
+		// écrire un nombre dans le flux
+		oss << "estimation" << i << ".png";
+		// récupérer une chaîne de caractères
+		std::string path = oss.str();
+		save(I, path);
 	}
 	return estimated_kernel;
 }
@@ -423,10 +452,10 @@ int main()
 	int w = B.width();
 	int h = B.height();
 
-	int kernel_size = 5;
+	int kernel_size = 3;
 
 	// create blur kernel
-	int ii, jj;
+	int ii, jj, i, j;
 	Vector<float> kernel, estimated_kernel, kernel_bilat;
 	kernel.setSize(kernel_size*kernel_size);
 	int ks = kernel_size/2;
@@ -450,21 +479,27 @@ int main()
 	norm = 0;
 	for(ii=-ks; ii<=ks; ++ii){
 		for(jj=-ks; jj<=ks; ++jj){
-			kernel_bilat[ii+ks+(jj+ks)*kernel_size] = exp(-float(ii*ii+jj*jj)/2);
+			kernel_bilat[ii+ks+(jj+ks)*kernel_size] = exp(-float(ii*ii+jj*jj)/4);
 			norm += kernel_bilat[ii+ks+(jj+ks)*kernel_size];
 		}
 	}
 	kernel_bilat/=norm;
-	Nd = kernelBilateral(N, kernel_bilat, 1);
+	Nd = kernelBilateral(N, kernel_bilat, 4);
+
+	for(i=0; i<w; ++i){
+		for(j=0; j<h; ++j){
+			I(i,j) = Nd(i,j);
+		}
+	}
 
 	// deblur picture
-	estimated_kernel = deblur(I, B, Nd, kernel_size, kernel);
-	estimated_blur = kernelBlurring(original, estimated_kernel);
+	estimated_kernel = deblur(I, B, Nd, 9, kernel);
+	estimated_blur = kernelBlurring(I, estimated_kernel);
 	noisy_blur = kernelBlurring(Nd, estimated_kernel);
 
 	// display kernels pictures
 	displayKernels(kernel, estimated_kernel);
-	
+
 	// display window
 	openWindow(3*w, 2*h);
 	display(original,0,0);
@@ -480,6 +515,7 @@ int main()
 	save(B, "blurred.png");
 	save(Nd, "denoised.png");
 	save(I, "estimation.png");
+	save(estimated_blur, "estimated_blur.png");
 	
 
 	endGraphics();
